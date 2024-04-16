@@ -1,0 +1,28 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашняя страница сервиса рассылок</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <h1>Добро пожаловать в сервис рассылок!</h1>
+    <p>Здесь вы можете управлять вашими клиентами, рассылками и сообщениями.</p>
+    <div class="buttons">
+        <a href="{% url 'mailing:client_list' %}" class="button">Управление клиентами</a>
+        <a href="{% url 'mailing:mailing_list' %}" class="button">Управление рассылками</a>
+        <a href="{% url 'mailing:message_list' %}" class="button">Управление сообщениями</a>
+        <a href="{% url 'mailing:blog_post_list' %}" class="button">Управление блогом</a>
+
+        {% if user.is_authenticated %}
+        <a href="{% url 'account_logout' %}" class="button">Выход</a>
+        {% else %}
+        <a href="{% url 'account_login' %}" class="button">Вход</a>
+        <a href="{% url 'account_signup' %}" class="button">Регистрация</a>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

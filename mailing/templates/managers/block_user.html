@@ -1,0 +1,13 @@
+{% block content %}
+<h1>Блокировка пользователя</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="user_id">Выберите пользователя:</label>
+    <select name="user_id" id="user_id">
+        {% for user in users %}
+        <option value="{{ user.id }}">{{ user.username }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Блокировать</button>
+</form>
+{% endblock %}

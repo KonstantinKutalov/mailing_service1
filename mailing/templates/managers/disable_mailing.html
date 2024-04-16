@@ -1,0 +1,13 @@
+{% block content %}
+<h1>Отключение рассылок</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="mailing_id">Выберите рассылку:</label>
+    <select name="mailing_id" id="mailing_id">
+        {% for mailing in mailings %}
+        <option value="{{ mailing.id }}">{{ mailing.title }} (Статус: {{ mailing.status }})</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Отключить</button>
+</form>
+{% endblock %}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление рассылками</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Добавляем разные цвета для четных и нечетных строк таблицы */
+        .mailing-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .status {
+            font-weight: bold;
+            color: red;
+        }
+
+        .mailing-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .mailing-description {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+        /* Добавляем стили для кнопок */
+        .btn-action {
+            margin-right: 5px;
+        }
+        .btn-action i {
+            margin-right: 3px;
+        }
+        /* Добавляем анимацию при наведении на кнопки */
+        .btn-action:hover {
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Управление рассылками</h1>
+
+    <!-- Кнопка для создания новой рассылки -->
+    <a href="{% url 'mailing:mailing_create' %}" class="btn btn-primary mb-3">Создать новую рассылку</a>
+
+    <!-- Список рассылок -->
+    {% if mailings %}
+    {% for mailing in mailings %}
+    <div class="mailing-item">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="mailing-title">
+                    {{ mailing.message.subject }} Статус:
+                    <span class="status">{{ mailing.status }}</span>
+                </h5>
+                <p class="mailing-description">{{ mailing.description }}</p>
+            </div>
+            <div>
+                <!-- Кнопки редактирования и удаления -->
+                <div class="btn-group">
+                    <a href="{% url 'mailing:mailing_update' mailing.pk %}"
+                       class="btn btn-sm btn-outline-secondary btn-action"><i class="fas fa-edit"></i> Редактировать</a>
+                    <a href="{% url 'mailing:mailing_delete' mailing.pk %}"
+                       class="btn btn-sm btn-outline-danger btn-action"><i class="fas fa-trash"></i> Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        Нет доступных рассылок.
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>

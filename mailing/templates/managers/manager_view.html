@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Менеджер</title>
+</head>
+<body>
+    <h1>Панель управления менеджера</h1>
+    <ul>
+        <li><a href="{% url 'mailing:client_list' %}">Просмотреть список клиентов</a></li>
+        <li><a href="{% url 'mailing:mailing_list' %}">Просмотреть список рассылок</a></li>
+        <li><a href="{% url 'block_user' %}">Заблокировать пользователя</a></li>
+        <li><a href="{% url 'disable_mailing' %}">Отключить рассылку</a></li>
+    </ul>
+</body>
+</html>

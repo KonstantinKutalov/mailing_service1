@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if form.instance.pk %}Редактировать рассылку{% else %}Добавить рассылку{% endif %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>{% if form.instance.pk %}Редактировать рассылку{% else %}Добавить рассылку{% endif %}</h1>
+
+    <!-- Форма для создания или редактирования Рассылки -->
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_send_datetime">Дата и время отправки:</label>
+            <input type="datetime-local" name="send_datetime" required id="id_send_datetime" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="id_frequency">Частота:</label>
+            <select name="frequency" required id="id_frequency" class="form-control">
+                <option value="every_10_hours">Каждые 10 часов</option>
+                <option value="every_24_hours">Каждые 24 часа</option>
+                <option value="weekly">Раз в неделю</option>
+                <option value="monthly">Раз в месяц</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="id_status">Статус:</label>
+            <select name="status" id="id_status" class="form-control">
+                <option value="draft" selected>Черновик</option>
+                <option value="sent">Отправлено</option>
+                <option value="cancelled">Отменено</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="id_message" class="form-label">Сообщение:</label>
+            {{ form.message }}
+        </div>
+        <div class="mb-3">
+            <label for="id_clients" class="form-label">Клиенты:</label>
+            {{ form.clients }}
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>
